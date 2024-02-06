@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* App.css */
+.main-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  background-color: lightpink;
+}
+
+/* Style for Yes and No buttons */
+.button-container {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.button-container button {
+  width: 100px; /* You can adjust the width as needed */
+  height: 75px;
+}
+
+/* Style for No button */
+.no-button {
+  background-color: red;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style for Yes button */
+.yes-button {
+  background-color: green;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* App.css */
+.second-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.second-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

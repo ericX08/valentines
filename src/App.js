@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
-const CountdownPage = ({ onDebug, showDebug = false }) => {
+
+const CountdownPage = () => {
   const [timeLeft, setTimeLeft] = useState({});
+  const targetDate = new Date('2025-02-14T00:00:00+01:00');
 
   useEffect(() => {
-    const targetDate = new Date('2025-02-14T00:00:00+01:00');
-    
     const timer = setInterval(() => {
       const now = new Date();
       const difference = targetDate - now;
@@ -22,7 +22,7 @@ const CountdownPage = ({ onDebug, showDebug = false }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []); // Now there are no external dependencies
+  }, []);
 
   const containerStyle = {
     minHeight: '100vh',
@@ -75,22 +75,6 @@ const CountdownPage = ({ onDebug, showDebug = false }) => {
           <div>Seconds</div>
         </div>
       </div>
-      {showDebug && (
-        <button
-          onClick={onDebug}
-          style={{
-            marginTop: '2rem',
-            padding: '0.5rem 1rem',
-            backgroundColor: '#ec4899',
-            color: 'white',
-            border: 'none',
-            borderRadius: '0.375rem',
-            cursor: 'pointer'
-          }}
-        >
-          Debug Mode (Skip Countdown)
-        </button>
-      )}
     </div>
   );
 };
@@ -103,21 +87,39 @@ const ValentinesQuiz = () => {
 
   const questions = [
     {
-      questionText: 'When did we first meet?',
+      questionText: 'what was the first meal we had together?',
       answerOptions: [
-        { answerText: 'At the coffee shop', isCorrect: true },
-        { answerText: 'At the library', isCorrect: false },
-        { answerText: 'At the park', isCorrect: false },
-        { answerText: 'At a party', isCorrect: false },
+        { answerText: 'Ramen', isCorrect: true },
+        { answerText: 'Avo Toast', isCorrect: false },
+        { answerText: 'Sushi', isCorrect: false },
+        { answerText: 'Dumplings', isCorrect: false },
       ],
     },
     {
-      questionText: 'What was our first movie together?',
+      questionText: 'What show did we actually watch together?',
       answerOptions: [
-        { answerText: 'The Notebook', isCorrect: false },
-        { answerText: 'La La Land', isCorrect: true },
-        { answerText: 'Titanic', isCorrect: false },
-        { answerText: 'Romeo and Juliet', isCorrect: false },
+        { answerText: 'Outer Banks', isCorrect: false },
+        { answerText: 'Ted Lasso', isCorrect: true },
+        { answerText: 'Suits', isCorrect: false },
+        { answerText: 'Euphoria', isCorrect: false },
+      ],
+    },
+    {
+      questionText: 'What is our future plans together?',
+      answerOptions: [
+        { answerText: 'Retired Golfers', isCorrect: false },
+        { answerText: 'Pickleball Pros', isCorrect: true },
+        { answerText: 'Cafe Owner', isCorrect: true },
+        { answerText: 'gym/pilates coach', isCorrect: false },
+      ],
+    },
+    {
+      questionText: 'What was our first planned trip together?',
+      answerOptions: [
+        { answerText: 'Texas', isCorrect: false },
+        { answerText: 'California', isCorrect: false },
+        { answerText: 'New York', isCorrect: false },
+        { answerText: 'Vermont', isCorrect: true },
       ],
     },
   ];
@@ -166,7 +168,7 @@ const ValentinesQuiz = () => {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/FHzzpCiOrVk?autoplay=1"
+            src="https://www.youtube.com/embed/FHzzpCiOrVk?autoplay=1&fs=1"
             title="Valentine's Video"
             frameBorder="0"
             allow="autoplay; encrypted-media"
@@ -176,6 +178,7 @@ const ValentinesQuiz = () => {
       </div>
     );
   }
+  
 
   if (showLoveNote) {
     return (
@@ -244,6 +247,7 @@ const ValentinesQuiz = () => {
 
   return (
     <div style={containerStyle}>
+      {/* Quiz content remains the same */}
       <div style={{
         maxWidth: '42rem',
         margin: '0 auto',
@@ -295,7 +299,6 @@ const ValentinesQuiz = () => {
 
 const App = () => {
   const [isValentinesDay, setIsValentinesDay] = useState(false);
-  const [showDebug] = useState(false); // Set this to false to hide the debug button
   
   const checkIfValentinesDay = () => {
     const now = new Date();
@@ -316,10 +319,7 @@ const App = () => {
             isValentinesDay ? (
               <ValentinesQuiz />
             ) : (
-              <CountdownPage 
-                onDebug={() => setIsValentinesDay(true)} 
-                showDebug={showDebug}
-              />
+              <CountdownPage/>
             )
           }
         />

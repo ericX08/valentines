@@ -1,83 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-
-
-const CountdownPage = () => {
-  const [timeLeft, setTimeLeft] = useState({});
-  const targetDate = new Date('2025-02-14T00:00:00+01:00');
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((difference / 1000 / 60) % 60);
-        const seconds = Math.floor((difference / 1000) % 60);
-
-        setTimeLeft({ days, hours, minutes, seconds });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const containerStyle = {
-    minHeight: '100vh',
-    backgroundColor: '#fdf2f8',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '2rem',
-    textAlign: 'center'
-  };
-
-  const timeBlockStyle = {
-    backgroundColor: 'white',
-    padding: '1rem 2rem',
-    borderRadius: '0.5rem',
-    margin: '0.5rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    minWidth: '120px'
-  };
-
-  return (
-    <div style={containerStyle}>
-      <h1 style={{ color: '#db2777', marginBottom: '2rem' }}>
-        Time Until Valentine's Day
-      </h1>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
-        <div style={timeBlockStyle}>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#db2777' }}>
-            {timeLeft.days}
-          </div>
-          <div>Days</div>
-        </div>
-        <div style={timeBlockStyle}>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#db2777' }}>
-            {timeLeft.hours}
-          </div>
-          <div>Hours</div>
-        </div>
-        <div style={timeBlockStyle}>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#db2777' }}>
-            {timeLeft.minutes}
-          </div>
-          <div>Minutes</div>
-        </div>
-        <div style={timeBlockStyle}>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#db2777' }}>
-            {timeLeft.seconds}
-          </div>
-          <div>Seconds</div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const ValentinesQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -178,7 +100,6 @@ const ValentinesQuiz = () => {
       </div>
     );
   }
-  
 
   if (showLoveNote) {
     return (
@@ -247,7 +168,6 @@ const ValentinesQuiz = () => {
 
   return (
     <div style={containerStyle}>
-      {/* Quiz content remains the same */}
       <div style={{
         maxWidth: '42rem',
         margin: '0 auto',
@@ -298,31 +218,10 @@ const ValentinesQuiz = () => {
 };
 
 const App = () => {
-  const [isValentinesDay, setIsValentinesDay] = useState(false);
-  
-  const checkIfValentinesDay = () => {
-    const now = new Date();
-    const valentinesDay = new Date('2025-02-14T00:00:00');
-    return now >= valentinesDay;
-  };
-
-  useEffect(() => {
-    setIsValentinesDay(checkIfValentinesDay());
-  }, []);
-
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isValentinesDay ? (
-              <ValentinesQuiz />
-            ) : (
-              <CountdownPage/>
-            )
-          }
-        />
+        <Route path="/" element={<ValentinesQuiz />} />
       </Routes>
     </Router>
   );
